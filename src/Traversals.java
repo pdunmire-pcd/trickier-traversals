@@ -94,7 +94,21 @@ public class Traversals {
    * @return the number of unique values in the tree, or 0 if the tree is null
    */
   public static int countDistinctValues(TreeNode<Integer> node) {
-    return 0;
+    if (node == null) {
+        return 0;
+    }
+    Set<Integer> uniqueValues = new HashSet<>();
+    countDistinctValuesHelper(node, uniqueValues);
+    return uniqueValues.size();
+  }
+
+  private static void countDistinctValuesHelper(TreeNode<Integer> node, Set<Integer> uniqueValues) {
+    if (node == null) {
+        return;
+    }
+    uniqueValues.add(node.value);
+    countDistinctValuesHelper(node.left, uniqueValues);
+    countDistinctValuesHelper(node.right, uniqueValues);
   }
 
   /**
